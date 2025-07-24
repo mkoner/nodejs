@@ -2,7 +2,7 @@ import data from './data.js';
 
 export const resolvers = {
     Query: {
-        games: () => data.game,
+        games: () => data.games,
         reviews: () => data.reviews,
         authors: () => data.authors,
         game: (_, { id }) => data.games.find(game => game.id === id),
@@ -42,6 +42,14 @@ export const resolvers = {
             };
             games.push(newGame);
             return newGame;
+        },
+        updateGame: (_, { game }) => {
+            const existingGame = data.games.find(g => g.id === game.id);
+            if (!existingGame) {
+                throw new Error('Game not found');
+            }
+            Object.assign(existingGame, game);
+            return existingGame;
         },
     },
 }
