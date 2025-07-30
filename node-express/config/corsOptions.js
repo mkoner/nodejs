@@ -1,12 +1,14 @@
-const whitelist = ['http://example1.com', 'http://example2.com']
+const {allowedOrigins} = require('./allowedOrigins');
 const corsOptions = {
   origin: function (origin, callback) {
-    //console.log(origin);
-    if (!origin || whitelist.indexOf(origin) !== -1) {
+    console.log(origin);
+    if (!origin || allowedOrigins.indexOf(origin) !== -1) {
       callback(null, true)
     } else {
       callback(new Error('Not allowed by CORS'))
     }
-  }
+  },
+  optionsSuccessStatus: 200,
+  credentials: true
 }
 module.exports = corsOptions;

@@ -1,0 +1,17 @@
+[
+  {
+    "username": "user1",
+    "password": "$2b$10$d9POq5uD9WIfRacKRLFiqu.Bxm9474Yn.HOIuNd7e0YIoZ6BgyZhS",
+    "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InVzZXIxIiwiaWF0IjoxNzUzOTE0MTk3LCJleHAiOjE3NTM5MTQ3OTd9.bHGPrlJknyb_4fKETza4gXDIuL_3DMtCt4jhgKtbLQs"
+  },
+  {
+    "username": "user2",
+    "password": "$2b$10$56HvZkNrWSk2z9xyOi5dze0q45CVj6313cEXqBLurmSiswiLDXkQG",
+    "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InVzZXIyIiwiaWF0IjoxNzUzODU0ODM2LCJleHAiOjE3NTM4NTUxMzZ9.gDwgKhOBK4-AhptN4-HbK_Nb5hWlSmq15MJACjylE-E"
+  },
+  {
+    "username": "user3",
+    "password": "$2b$10$IxVsaXU4xgI2wp2f.sSwyeVsFdCpSBw0QxSYS7fcvBp/rr3X.wYZC",
+    "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InVzZXIzIiwiaWF0IjoxNzUzOTA2NjY4LCJleHAiOjE3NTM5MDcyNjh9.rUQ3ut0a2vtxwfp1sCQoAVx2bO02orZaGZsEDqEiqFk"
+  }
+]

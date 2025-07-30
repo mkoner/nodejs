@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fetch with Cookies Test</title>
+</head>
+<body>
+  <h1>Fetch + Cookies Test</h1>
+
+  <button id="loginBtn">Login</button>
+  <button id="dataBtn">Get Data</button>
+
+  <pre id="output"></pre>
+
+  <script>
+    const BASE_URL = 'http://localhost:3000/api';
+
+    function log(message) {
+      document.getElementById('output').textContent += message + '\n';
+    }
+
+    document.getElementById('loginBtn').addEventListener('click', () => {
+      fetch(`${BASE_URL}/auth/login`, {
+        method: 'POST',
+        credentials: 'include', // allow sending/receiving cookies
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          username: 'user1',
+          password: 'mypassword'
+        })
+      })
+      .then(res => res.json())
+      .then(data => {
+        log('Login response: ' + JSON.stringify(data, null, 2));
+      })
+      .catch(err => {
+        log('Login error: ' + err);
+      });
+    });
+
+    document.getElementById('dataBtn').addEventListener('click', () => {
+      fetch(`${BASE_URL}/data`, {
+        method: 'GET',
+        credentials: 'include', // cookies will be sent here
+      })
+      .then(res => res.json())
+      .then(data => {
+        log('Data response: ' + JSON.stringify(data, null, 2));
+      })
+      .catch(err => {
+        log('Data fetch error: ' + err);
+      });
+    });
+  </script>
+</body>
+</html>

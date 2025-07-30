@@ -1,13 +1,14 @@
 const express = require('express');
 const router = express.Router();
 const gamesController = require('../controllers/gamesController');
+const verifyToken = require('../middleware/verifyJWT');
 
 router.route('/')
     .get(gamesController.getGames)
-    .post(gamesController.addGame);
+    .post(verifyToken, gamesController.addGame);
 router.route('/:id')
     .get(gamesController.getGameById)
-    .put(gamesController.updateGame)
-    .delete(gamesController.deleteGame);
+    .put(verifyToken, gamesController.updateGame)
+    .delete(verifyToken, gamesController.deleteGame);
 
 module.exports = router;
