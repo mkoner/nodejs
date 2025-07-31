@@ -2,16 +2,30 @@
   {
     "username": "user1",
     "password": "$2b$10$d9POq5uD9WIfRacKRLFiqu.Bxm9474Yn.HOIuNd7e0YIoZ6BgyZhS",
-    "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InVzZXIxIiwiaWF0IjoxNzUzOTE0MTk3LCJleHAiOjE3NTM5MTQ3OTd9.bHGPrlJknyb_4fKETza4gXDIuL_3DMtCt4jhgKtbLQs"
+    "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InVzZXIxIiwiaWF0IjoxNzUzOTQ5MTEyLCJleHAiOjE3NTM5NDk3MTJ9.USEv6ILsboVulzOEfBZIaQC6LM5wIN8fdqgNfD97p9k",
+    "permissions": [
+      "READ_GAME",
+      "CREATE_GAME",
+      "UPDATE_GAME"
+    ]
   },
   {
     "username": "user2",
     "password": "$2b$10$56HvZkNrWSk2z9xyOi5dze0q45CVj6313cEXqBLurmSiswiLDXkQG",
-    "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InVzZXIyIiwiaWF0IjoxNzUzODU0ODM2LCJleHAiOjE3NTM4NTUxMzZ9.gDwgKhOBK4-AhptN4-HbK_Nb5hWlSmq15MJACjylE-E"
+    "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InVzZXIyIiwiaWF0IjoxNzUzOTQ5MjEyLCJleHAiOjE3NTM5NDk4MTJ9.YS9lqI_w0lzUrMw9HpKcyKrxnsYmpXAIGODatfU0FX0",
+    "permissions": [
+      "READ_GAME",
+      "DELETE_GAME",
+      "UPDATE_GAME",
+      "CREATE_GAME"
+    ]
   },
   {
     "username": "user3",
     "password": "$2b$10$IxVsaXU4xgI2wp2f.sSwyeVsFdCpSBw0QxSYS7fcvBp/rr3X.wYZC",
-    "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InVzZXIzIiwiaWF0IjoxNzUzOTA2NjY4LCJleHAiOjE3NTM5MDcyNjh9.rUQ3ut0a2vtxwfp1sCQoAVx2bO02orZaGZsEDqEiqFk"
+    "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InVzZXIzIiwiaWF0IjoxNzUzOTQ4OTk2LCJleHAiOjE3NTM5NDk1OTZ9.nf3V-k3ToISdpVdG3bJZXia-LgaQOjtSSOH9DAmC-04",
+    "permissions": [
+      "READ_GAME"
+    ]
   }
 ]

@@ -4,6 +4,7 @@ const fsPromises = require('fs').promises;
 const path = require('path');
 require('dotenv').config();
 const cookieOptions = require('../config/cookieOptions');
+const permissions = require('../config/permissions');
 
 
 const usersFile = path.join(__dirname, '..', 'models', 'users.json');
@@ -65,7 +66,11 @@ const loginUser = async (req, res) => {
         return res.status(401).json({ message: 'Invalid username or password' });
     }
 
-    const accessToken = jwt.sign({ username: user.username }, accessTokenSecret, { expiresIn: '5m' });
+    const accessToken = jwt.sign({ 
+        username: user.username,
+        permissions: user.permissions.map(permission => permissions[permission])
+        }, 
+        accessTokenSecret, { expiresIn: '5m' });
     const refreshToken = jwt.sign({ username: user.username }, refreshTokenSecret, { expiresIn: '10m' });
     user.refreshToken = refreshToken;
     await saveUsers(users);
@@ -90,7 +95,11 @@ const refreshToken = async (req, res) => {
         if (err || user.username !== decoded.username) {
             return res.sendStatus(403);
         }
-        const accessToken = jwt.sign({ username: user.username }, accessTokenSecret, { expiresIn: '5m' });
+        const accessToken = jwt.sign({ 
+            username: user.username,
+            permissions: user.permissions.map(permission => permissions[permission])
+            }, 
+            accessTokenSecret, { expiresIn: '5m' });
         res.json({ accessToken });
     });
 }
