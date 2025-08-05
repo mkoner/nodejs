@@ -1,14 +1,13 @@
+const Game = require('../models/game');
 
-const games = require('../models/games.json');
-
-const getGames = (req, res) => {
+const getGames = async (req, res) => {
+  const games = await Game.find().exec();
   res.json(games);
 }
 
-const getGameById = (req, res) => {
+const getGameById = async (req, res) => {
   const gameId = parseInt(req.params.id, 10);
-  const game = games.find(g => g.id === gameId);
-  
+  const game = await Game.findOne({ id: gameId }).exec();
   if (game) {
     res.json(game);
   } else {
@@ -16,25 +15,28 @@ const getGameById = (req, res) => {
   }
 }
 
-const addGame = (req, res) => {
+const addGame = async (req, res) => {
     const newGame = req.body;
     if (!newGame.title || !Array.isArray(newGame.platform)) {
         return res.status(400).json({ message: 'Title and platform are required' });
     }
     
-    newGame.id = games.length ? games[games.length - 1].id + 1 : 1;
-    games.push(newGame);
-    
-    res.status(201).json(newGame);
+    newGame.id = await Game.find().sort({ id: -1 }).limit(1).then(games => games.length > 0 ? games[0].id + 1 : 1);
+    try {
+        const createdGame = await Game.create(newGame);
+        return res.status(201).json(createdGame);
+    } catch (error) {
+        console.error('Error creating game:', error);
+        return res.status(500).json({ message: 'Internal server error' });
+    }
 }
 
-const updateGame = (req, res) => {
+const updateGame = async (req, res) => {
   const gameId = parseInt(req.params.id, 10);
-  const index = games.findIndex(g => g.id === gameId);
-  if (index === -1) {
+  const game = await Game.findOne({id: gameId}).exec();
+  if (!game) {
     return res.status(404).json({ message: 'Game not found' });
   }
-  const game = games[index];
   const {title, platform} = req.body;
   if (!title && !platform) {
     return res.status(400).json({ message: 'Title or platform are required' });
@@ -42,22 +44,27 @@ const updateGame = (req, res) => {
   if (title) game.title = title.trim();
   if (platform && Array.isArray(platform)) game.platform = platform.map(p => p.trim());
 
-  games[index] = game;
-  
-  res.json(game);
+ try {
+    await game.save();
+    return res.json(game);
+  } catch (error) {
+    console.error('Error updating game:', error);
+    return res.status(500).json({ message: 'Internal server error' });
+  }
 }
 
-const deleteGame = (req, res) => {
+const deleteGame =  async (req, res) => {
   const gameId = parseInt(req.params.id, 10);
-  const index = games.findIndex(g => g.id === gameId);
-  
-  if (index === -1) {
-    return res.status(404).json({ message: 'Game not found' });
+  try {
+    const result = await Game.deleteOne({ id: gameId }).exec();
+    if (result.deletedCount === 0) {  
+      return res.status(404).json({ message: 'Game not found' });
+    }
+    return res.json({ message: 'Game deleted successfully' });
+  } catch (error) {
+    console.error('Error deleting game:', error);
+    return res.status(500).json({ message: 'Internal server error' });
   }
-  
-  games.splice(index, 1);
-  
-  res.status(204).send();
 }
 
 module.exports = {

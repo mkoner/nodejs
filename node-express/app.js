@@ -12,7 +12,11 @@ const credentials = require('./middleware/credentials');
 const gamesRouter = require('./routes/games');
 const authRouter = require('./routes/auth');
 const port = 3000;
+require('dotenv').config();
+const connectDB = require('./config/dbConnection');
+const mongoose = require('mongoose');
 
+connectDB();
 
 // Custom middleware 
 app.use(requestLogger);
@@ -39,6 +43,9 @@ app.use(notFoundHandler);
 
 app.use(errorHandler);
 
-app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`)
-})
+mongoose.connection.once('open', () => {
+  console.log('Connected to MongoDB');
+  app.listen(port, () => {
+    console.log(`Server running on port ${port}`);
+  });
+});
